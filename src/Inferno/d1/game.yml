@@ -1556,7 +1556,6 @@ Effects:
 
 Ships:
   - Name: Pyro-GX
-    Model: 43
     ModelName: ship.pof
     DestroyedModelName: shipd.pof
     ExplosionVClip: 58
