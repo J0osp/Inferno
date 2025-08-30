@@ -233,6 +233,8 @@ namespace Inferno {
 
         auto& powerup = ham.Powerups[id];
         Yaml::ReadValue(node["VClip"], powerup.VClip);
+        Yaml::ReadValue(node["HitSound"], powerup.HitSound);
+        Yaml::ReadValue(node["Size"], powerup.Size);
         Yaml::ReadValue(node["LightRadius"], powerup.LightRadius);
         Yaml::ReadValue(node["LightColor"], powerup.LightColor);
         Yaml::ReadValue(node["LightMode"], (int&)powerup.LightMode);
