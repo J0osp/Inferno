@@ -157,7 +157,7 @@ namespace Inferno {
         auto& weaponInfo = Resources::GetWeapon(GetPrimaryWeaponID((PrimaryWeaponIndex)weapon));
 
         if (!HasWeapon((PrimaryWeaponIndex)weapon)) {
-            if (weaponInfo.Extended.SilentSelectFail == false) {
+            if (!weaponInfo.Extended.SilentSelectFail) {
                 auto msg = fmt::format("you don't have the {}!", weaponInfo.Extended.FullName);
                 PrintHudMessage(msg);
                 Sound::Play2D({ SoundID::SelectFail });
@@ -215,7 +215,7 @@ namespace Inferno {
         auto& weaponInfo = Resources::GetWeapon(GetSecondaryWeaponID((SecondaryWeaponIndex)weapon));
 
         if (!CanFireSecondary((SecondaryWeaponIndex)weapon)) {
-            if (weaponInfo.Extended.SilentSelectFail == false) {
+            if (!weaponInfo.Extended.SilentSelectFail) {
                 auto msg = fmt::format("you have no {}s!", weaponInfo.Extended.FullName);
                 PrintHudMessage(msg);
                 Sound::Play2D({ SoundID::SelectFail });
@@ -1480,7 +1480,7 @@ namespace Inferno {
                         amount = PickUpAmmo((PrimaryWeaponIndex)ammoType, powerup.Ammo);
 
                         if (amount > 0) {
-                            if (used == false) {
+                            if (!used) {
                                 AddScreenFlash(FLASH_PRIMARY * 0.66f);
                                 PrintHudMessage(fmt::format("{} {}!", amount, battery.AmmoName));
                                 used = true;
@@ -1557,11 +1557,11 @@ namespace Inferno {
             return false;
         }
 
-        if (weaponInfo.Extended.PickupMessage == "") {
+        if (weaponInfo.Extended.PickupMessage.empty()) {
             PrintHudMessage(fmt::format("{}!", weaponInfo.Extended.FullName));
         }
         else {
-            PrintHudMessage(fmt::format("{}", weaponInfo.Extended.PickupMessage));
+            PrintHudMessage(weaponInfo.Extended.PickupMessage);
         }
 
         GiveWeapon(index);
@@ -1605,7 +1605,7 @@ namespace Inferno {
                 PrintHudMessage(msg);
             }
             else {
-                PrintHudMessage(fmt::format("{}", weaponInfo.Extended.PickupMessage));
+                PrintHudMessage(weaponInfo.Extended.PickupMessage);
             }
         }
         else {
@@ -1614,7 +1614,7 @@ namespace Inferno {
                 PrintHudMessage(fmt::format("{}!", name));
             }
             else {
-                PrintHudMessage(fmt::format("{}", weaponInfo.Extended.PickupMessage));
+                PrintHudMessage(weaponInfo.Extended.PickupMessage);
             }
         }
 
